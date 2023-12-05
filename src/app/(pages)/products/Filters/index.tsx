@@ -16,12 +16,15 @@ const Filters = ({ categories }: { categories: Category[] }) => {
   const handleCategories = (categoryId: string) => {
     if (categoryFilters.includes(categoryId)) {
       const updatedCategories = categoryFilters.filter(id => id !== categoryId)
+
       setCategoryFilters(updatedCategories)
     } else {
       setCategoryFilters([...categoryFilters, categoryId])
     }
   }
+
   const handleSort = (value: string) => setSort(value)
+
   return (
     <div className={classes.filters}>
       <div>
@@ -29,6 +32,7 @@ const Filters = ({ categories }: { categories: Category[] }) => {
         <div className={classes.categories}>
           {categories.map(category => {
             const isSelected = categoryFilters.includes(category.id)
+
             return (
               <Checkbox
                 key={category.id}
@@ -41,19 +45,19 @@ const Filters = ({ categories }: { categories: Category[] }) => {
           })}
         </div>
         <HR className={classes.hr} />
-        <h6 className={classes.title}></h6>
+        <h6 className={classes.title}>Sort By</h6>
         <div className={classes.categories}>
           <RadioButton
             label="Latest"
-            value="-createAt"
-            isSelected={sort === '-createAt'}
+            value="-createdAt"
+            isSelected={sort === '-createdAt'}
             onRadioChange={handleSort}
             groupName="sort"
           />
           <RadioButton
             label="Oldest"
-            value="createAt"
-            isSelected={sort === 'createAt'}
+            value="createdAt"
+            isSelected={sort === 'createdAt'}
             onRadioChange={handleSort}
             groupName="sort"
           />
