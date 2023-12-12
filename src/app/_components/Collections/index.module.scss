@@ -1,0 +1,9 @@
+@use '../../_css/queries.scss' as *;
+
+  
+.center{
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    display: flex;
+}

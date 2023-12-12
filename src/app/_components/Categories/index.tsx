@@ -2,6 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 
 import { Category } from '../../../payload/payload-types'
+import { HR } from '../HR'
 import CategoryCard from './CategoryCard'
 
 import classes from './index.module.scss'
@@ -20,6 +21,7 @@ const Categories = ({ categories }: { categories: Category[] }) => {
             return <CategoryCard key={category.id} category={category} />
           })}
       </div>
+      <HR />
     </section>
   )
 }

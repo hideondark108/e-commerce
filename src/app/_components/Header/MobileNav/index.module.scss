@@ -1,0 +1,44 @@
+@use '../../../_css/queries.scss' as *;
+
+
+.nav {
+    position: relative;
+    gap: 30px;
+    display: none;
+    @include small-break{
+        display: flex;
+        gap: 16px;
+    }
+}
+
+
+.MobileNav {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 30px;
+  position: absolute;
+  right: -20px;
+  top: 24px;
+  border-radius: 10px;
+  opacity: 1;
+  transition: opacity .1s linear;
+  visibility: visible;
+  white-space: nowrap;
+  padding: 30px;
+  z-index: 100;
+  background-color: var(--color-white-500);
+  box-shadow: 0 10px 15px -3px rgba(0,0,0,.1),
+  0 4px 6px -4px rgba(0,0,0,.1);
+
+
+  > * {
+    text-decoration: none;
+  }
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
+}

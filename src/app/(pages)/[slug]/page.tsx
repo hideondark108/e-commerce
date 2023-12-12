@@ -20,6 +20,7 @@ import { generateMeta } from '../../_utilities/generateMeta'
 // If you are not using Payload Cloud then this line can be removed, see `../../../README.md#cache`
 export const dynamic = 'force-dynamic'
 import Categories from '../../_components/Categories'
+import Collections from '../../_components/Collections'
 import Promotion from '../../_components/Promotion'
 
 import classes from './index.module.scss'
@@ -28,6 +29,7 @@ export default async function Page({ params: { slug = 'home' } }) {
   const { isEnabled: isDraftMode } = draftMode()
 
   let page: Page | null = null
+  let product: Page | null = null
   let categories: Category[] | null = null
 
   try {
@@ -36,12 +38,17 @@ export default async function Page({ params: { slug = 'home' } }) {
       slug,
       draft: isDraftMode,
     })
+    product = await fetchDoc<Page>({
+      collection: 'pages',
+      slug: 'collections',
+      draft: isDraftMode,
+    })
     categories = await fetchDocs<Category>('categories')
   } catch (error) {
     // when deploying this template on Payload Cloud, this page needs to build before the APIs are live
     // so swallow the error here and simply render the page with fallback data where necessary
     // in production you may want to redirect to a 404  page or at least log the error somewhere
-    // console.error(error)
+    console.error(error)
   }
 
   // if no `home` page exists, render a static one using dummy content
@@ -64,6 +71,7 @@ export default async function Page({ params: { slug = 'home' } }) {
           <Hero {...hero} />
           <Gutter className={classes.home}>
             <Categories categories={categories} />
+            <Collections products={product} />
             <Promotion />
           </Gutter>
         </section>
